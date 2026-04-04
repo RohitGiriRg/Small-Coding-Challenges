@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>News Ticker</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .ticker {
+      width: 100%;
+      overflow: hidden;
+      background: black;
+      color: white;
+      padding: 100px;
+      position: relative;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      white-space: nowrap;
+      position: absolute;
+      will-change: transform;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ticker">
+    <div class="ticker-text" id="tickerText"></div>
+  </div>
+
+  <script>
+    const headlines = [
+      "🚨 Breaking: JavaScript is still awesome!",
+      "💻 Practice coding daily for success",
+      "🔥 Node.js + TypeScript = powerful combo",
+      "🎯 Small projects = big growth",
+      "⚡ Stay consistent, get results"
+    ];
+
+    const ticker = document.getElementById("tickerText");
+
+    // join all headlines
+    ticker.innerText = headlines.join("   ✦   ");
+
+    let position = window.innerWidth;
+
+    function animate() {
+      position--;
+
+      ticker.style.transform = `translateX(${position}px)`;
+
+      // reset when text goes fully left
+      if (position < -ticker.offsetWidth) {
+        position = window.innerWidth;
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>
